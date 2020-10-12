@@ -2,10 +2,10 @@
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using interceptors.Infrastructure;
-using interceptors.Infrastructure.Interceptors;
+using advicetest.Infrastructure;
+using advicetest.Infrastructure.Interceptors;
 
-namespace interceptors.Advices
+namespace advicetest.Advices
 {
 	/// <summary>
 	/// Адвайз для сервисов приложения

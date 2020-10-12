@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
 using Force.DeepCloner;
-using interceptors.Infrastructure.Interceptors.Extensions;
-using interceptors.Infrastructure.Interceptors.Services;
+using advicetest.Infrastructure.Interceptors.Extensions;
+using advicetest.Infrastructure.Interceptors.Services;
 
-namespace interceptors.Infrastructure.Interceptors
+namespace advicetest.Infrastructure.Interceptors
 {
 	/// <summary>
 	/// Перехватчик

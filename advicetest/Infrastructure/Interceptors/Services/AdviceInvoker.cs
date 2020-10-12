@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace interceptors.Infrastructure.Interceptors.Services
+namespace advicetest.Infrastructure.Interceptors.Services
 {
 	/// <summary>
 	/// Запуск Advice

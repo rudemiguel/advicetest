@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using interceptors.Contracts;
-using interceptors.Infrastructure;
+using advicetest.Contracts;
+using advicetest.Infrastructure;
 
-namespace interceptors.Services
+namespace advicetest.Services
 {
 	/// <summary>
 	/// Сервис прогноза погоды

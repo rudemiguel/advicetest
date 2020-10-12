@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace interceptors.Infrastructure.Interceptors.Extensions
+namespace advicetest.Infrastructure.Interceptors.Extensions
 {
 	public static class TaskExtensions
 	{

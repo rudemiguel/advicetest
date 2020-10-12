@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace interceptors.Contracts
+namespace advicetest.Contracts
 {
 	public class WeatherForecastContract
 	{

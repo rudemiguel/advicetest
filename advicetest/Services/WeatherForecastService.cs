@@ -1,13 +1,13 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using interceptors.Contracts;
+using advicetest.Contracts;
 
-namespace interceptors.Services
+namespace advicetest.Services
 {
 	/// <summary>
-	/// Сервис прогноза погоды
+	/// РЎРµСЂРІРёСЃ РїСЂРѕРіРЅРѕР·Р° РїРѕРіРѕРґС‹
 	/// </summary>
 	public class WeatherForecastService : IWeatherForecastService
 	{
@@ -23,7 +23,7 @@ namespace interceptors.Services
 		}
 
 		/// <summary>
-		/// Прогноз погоды на нскольео дней
+		/// РџСЂРѕРіРЅРѕР· РїРѕРіРѕРґС‹ РЅР° РЅСЃРєРѕР»СЊРµРѕ РґРЅРµР№
 		/// </summary>
 		public async Task<IReadOnlyCollection<WeatherForecastContract>> GetForecast(int days)
 		{
@@ -36,7 +36,7 @@ namespace interceptors.Services
 		}
 
 		/// <summary>
-		/// Сегодняшний день
+		/// РЎРµРіРѕРґРЅСЏС€РЅРёР№ РґРµРЅСЊ
 		/// </summary>
 		public DateTime Today()
 		{

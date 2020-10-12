@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using interceptors.Contracts;
-using interceptors.Services;
+using advicetest.Contracts;
+using advicetest.Services;
 
-namespace interceptors.Controllers
+namespace advicetest.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace interceptors.Infrastructure.Interceptors.Services
+namespace advicetest.Infrastructure.Interceptors.Services
 {
 	/// <summary>
 	/// Запускатель Advice

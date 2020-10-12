@@ -2,9 +2,9 @@
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Castle.DynamicProxy;
-using interceptors.Infrastructure.Interceptors.Services;
+using advicetest.Infrastructure.Interceptors.Services;
 
-namespace interceptors.Infrastructure.Interceptors.Setup
+namespace advicetest.Infrastructure.Interceptors.Setup
 {
 	/// <summary>
 	/// Настройка перехватчиков

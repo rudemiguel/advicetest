@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
 
-namespace interceptors.Infrastructure.Interceptors.Services
+namespace advicetest.Infrastructure.Interceptors.Services
 {
 	/// <summary>
 	/// Таргет адвайзов

@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace interceptors.Infrastructure.Interceptors
+namespace advicetest.Infrastructure.Interceptors
 {
 	/// <summary>
 	/// Интерфейс для advice

@@ -1,27 +1,26 @@
-using Microsoft.AspNetCore.Builder;
+п»їusing Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using interceptors.Infrastructure;
-using interceptors.Infrastructure.Interceptors.Setup;
-using interceptors.Services;
-using interceptors.Infrastructure.Interceptors;
+using advicetest.Infrastructure;
+using advicetest.Infrastructure.Interceptors.Setup;
+using advicetest.Services;
 
-namespace interceptors
+namespace advicetest
 {
 	/// <summary>
-	/// Стартап
+	/// РЎС‚Р°СЂС‚Р°Рї
 	/// </summary>
 	public class Startup
 	{
 		/// <summary>
-		/// Настройки приложения
+		/// РќР°СЃС‚СЂРѕР№РєРё РїСЂРёР»РѕР¶РµРЅРёСЏ
 		/// </summary>
 		public IConfiguration Configuration { get; }
 
 		/// <summary>
-		/// Стартап
+		/// РЎС‚Р°СЂС‚Р°Рї
 		/// </summary>		
 		public Startup(IConfiguration configuration)
 		{
@@ -29,22 +28,22 @@ namespace interceptors
 		}
 
 		/// <summary>
-		/// Настрока DI
+		/// РќР°СЃС‚СЂРѕРєР° DI
 		/// </summary>
 		public void ConfigureServices(IServiceCollection services)
 		{
-			// Добавляем сервисы
+			// Р”РѕР±Р°РІР»СЏРµРј СЃРµСЂРІРёСЃС‹
 			services.AddTransient<IWeatherForecastService, WeatherForecastService>();
 
-			// Добавляем контроллеры
+			// Р”РѕР±Р°РІР»СЏРµРј РєРѕРЅС‚СЂРѕР»Р»РµСЂС‹
 			services.AddControllers();
 
-			// Настройка перехватчиков
+			// РќР°СЃС‚СЂРѕР№РєР° РїРµСЂРµС…РІР°С‚С‡РёРєРѕРІ
 			services.AddAdvicesOf<IApplicationService>();			
 		}
 
 		/// <summary>
-		/// Настройка приложения
+		/// РќР°СЃС‚СЂРѕР№РєР° РїСЂРёР»РѕР¶РµРЅРёСЏ
 		/// </summary>
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{

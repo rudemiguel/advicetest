@@ -1,4 +1,4 @@
-﻿namespace interceptors.Infrastructure
+﻿namespace advicetest.Infrastructure
 {
 	/// <summary>
 	/// Сервис
