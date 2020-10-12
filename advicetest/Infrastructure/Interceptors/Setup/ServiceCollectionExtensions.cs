@@ -26,23 +26,23 @@ namespace advicetest.Infrastructure.Interceptors.Setup
 
 			// Заменяем дескрипторы сервисов на нашу фабрику
 			foreach (var serviceDescriptor in proxyServiceDescriptors)
-			{				 
-                services.Remove(serviceDescriptor);
+			{
+				services.Remove(serviceDescriptor);
 
 				var proxyServiceDescriptor = new ServiceDescriptor(serviceDescriptor.ServiceType, (sp) => ServiceFactory(sp, serviceDescriptor), serviceDescriptor.Lifetime);
-                
-                services.Add(proxyServiceDescriptor);
+
+				services.Add(proxyServiceDescriptor);
 			}
 
 			// Добавляем сервис
 			services.AddSingleton<IAdviceInvoker, AdviceInvoker>();
 
 			// Добавляем адвайзы
-			services.Scan(scan => scan     
+			services.Scan(scan => scan
 				.FromApplicationDependencies()
-		        .AddClasses(classes => classes.AssignableTo(typeof(IAdvice<>)))
-	            .AsImplementedInterfaces()
-				.WithTransientLifetime()		
+				.AddClasses(classes => classes.AssignableTo(typeof(IAdvice<>)))
+				.AsImplementedInterfaces()
+				.WithTransientLifetime()
 			);
 
 			return services;
@@ -55,7 +55,7 @@ namespace advicetest.Infrastructure.Interceptors.Setup
 		{
 			var service = ActivatorUtilities.CreateInstance(serviceProvider, serviceDescriptor.ImplementationType);
 			var interceptor = ActivatorUtilities.CreateInstance<Interceptor>(serviceProvider);
-			
+
 			return generator.CreateInterfaceProxyWithTarget(serviceDescriptor.ServiceType, service, interceptor);
 		}
 	}

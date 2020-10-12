@@ -18,6 +18,9 @@ namespace advicetest.Services
 			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 		};
 
+		/// <summary>
+		/// Сервис прогноза погоды
+		/// </summary>
 		public WeatherForecastService()
 		{
 		}
