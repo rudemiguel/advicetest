@@ -37,7 +37,7 @@ namespace advicetest.Advices
         /// </summary>
         public async Task After(MethodInfo methodInfo, object returnValue, object[] parameters)
         {
-            _logger.LogInformation("После вызовом метода {@methodName}", methodInfo.Name);
+            _logger.LogInformation("После вызова метода {@methodName}", methodInfo.Name);
         }
 
         /// <summary>

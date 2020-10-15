@@ -6,57 +6,66 @@ using advicetest.Infrastructure.Interceptors.Services;
 
 namespace advicetest.Infrastructure.Interceptors.Setup
 {
-	/// <summary>
-	/// Настройка перехватчиков
-	/// </summary>
-	public static class ServiceCollectionExtensions
-	{
-		private static ProxyGenerator generator = new ProxyGenerator();
+    /// <summary>
+    /// Настройка перехватчиков
+    /// </summary>
+    public static class ServiceCollectionExtensions
+    {
+        private static readonly ProxyGenerator Generator = new ProxyGenerator();
 
-		/// <summary>
-		/// Настройка перехватчиков для сервисов наследованных от T
-		/// </summary>
-		public static IServiceCollection AddAdvicesOf<T>(this IServiceCollection services)
-			where T : class
-		{
-			// Вытаскиваем сервисы кт наслежованный от T
-			var proxyServiceDescriptors = services
-				.Where(x => typeof(T).IsAssignableFrom(x.ServiceType))
-				.ToList();
+        /// <summary>
+        /// Число копий <see cref="IAdvice"/> в IoT контейнере
+        /// </summary>
+        private static int NumberOfAdviceCopies => 1;
 
-			// Заменяем дескрипторы сервисов на нашу фабрику
-			foreach (var serviceDescriptor in proxyServiceDescriptors)
-			{
-				services.Remove(serviceDescriptor);
+        /// <summary>
+        /// Настройка перехватчиков для сервисов наследованных от T
+        /// </summary>
+        public static IServiceCollection AddAdvicesOf<T>(this IServiceCollection services)
+            where T : class
+        {
+            // Вытаскиваем сервисы кт наслежованный от T
+            var proxyServiceDescriptors = services
+                .Where(x => typeof(T).IsAssignableFrom(x.ServiceType))
+                .ToList();
 
-				var proxyServiceDescriptor = new ServiceDescriptor(serviceDescriptor.ServiceType, (sp) => ServiceFactory(sp, serviceDescriptor), serviceDescriptor.Lifetime);
+            // Заменяем дескрипторы сервисов на нашу фабрику
+            foreach (var serviceDescriptor in proxyServiceDescriptors)
+            {
+                services.Remove(serviceDescriptor);
 
-				services.Add(proxyServiceDescriptor);
-			}
+                var proxyServiceDescriptor = new ServiceDescriptor(serviceDescriptor.ServiceType, (sp) => ServiceFactory(sp, serviceDescriptor), serviceDescriptor.Lifetime);
 
-			// Добавляем сервис
-			services.AddSingleton<IAdviceInvoker, AdviceInvoker>();
+                services.Add(proxyServiceDescriptor);
+            }
 
-			// Добавляем адвайзы
-			services.Scan(scan => scan
-				.FromApplicationDependencies()
-				.AddClasses(classes => classes.AssignableTo(typeof(IAdvice<>)))
-				.AsImplementedInterfaces()
-				.WithTransientLifetime()
-			);
+            // Добавляем сервис
+            services.AddSingleton<IAdviceInvoker, AdviceInvoker>();
 
-			return services;
-		}
+            // Добавляем адвайзы
+            Enumerable.Range(0, NumberOfAdviceCopies)
+                .ToList()
+                .ForEach(x =>
+                    services.Scan(scan => scan
+                        .FromApplicationDependencies()
+                        .AddClasses(classes => classes.AssignableTo(typeof(IAdvice<>)))
+                        .AsImplementedInterfaces()
+                        .WithTransientLifetime()
+                    )
+                );
 
-		/// <summary>
-		/// Фабрика создания экземпляра сервиса
-		/// </summary>
-		private static object ServiceFactory(IServiceProvider serviceProvider, ServiceDescriptor serviceDescriptor)
-		{
-			var service = ActivatorUtilities.CreateInstance(serviceProvider, serviceDescriptor.ImplementationType);
-			var interceptor = ActivatorUtilities.CreateInstance<Interceptor>(serviceProvider);
+            return services;
+        }
 
-			return generator.CreateInterfaceProxyWithTarget(serviceDescriptor.ServiceType, service, interceptor);
-		}
-	}
+        /// <summary>
+        /// Фабрика создания экземпляра сервиса
+        /// </summary>
+        private static object ServiceFactory(IServiceProvider serviceProvider, ServiceDescriptor serviceDescriptor)
+        {
+            var service = ActivatorUtilities.CreateInstance(serviceProvider, serviceDescriptor.ImplementationType);
+            var interceptor = ActivatorUtilities.CreateInstance<Interceptor>(serviceProvider);
+
+            return Generator.CreateInterfaceProxyWithTarget(serviceDescriptor.ServiceType, service, interceptor);
+        }
+    }
 }
