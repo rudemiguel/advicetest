@@ -6,25 +6,23 @@ using advicetest.Services;
 
 namespace advicetest.Controllers
 {
-	[ApiController]
-	[Route("[controller]")]
-	public class WeatherForecastController : ControllerBase
-	{
-		private readonly IWeatherForecastService _weatherForecastService;
+    [ApiController]
+    [Route("[controller]")]
+    public class WeatherForecastController : ControllerBase
+    {
+        private readonly IWeatherForecastService _weatherForecastService;
 
-		public WeatherForecastController(
-			IWeatherForecastService weatherForecastService			
-		)
-		{
-			_weatherForecastService = weatherForecastService;
-		}
+        public WeatherForecastController(
+            IWeatherForecastService weatherForecastService
+        )
+        {
+            _weatherForecastService = weatherForecastService;
+        }
 
-		[HttpGet]
-		public async Task<IEnumerable<WeatherForecastContract>> Get()
-		{
-			var today = _weatherForecastService.Today();
-
-			return await _weatherForecastService.GetForecast(10);
-		}
-	}
+        [HttpGet]
+        public async Task<IEnumerable<WeatherForecastContract>> Get()
+        {
+            return await _weatherForecastService.GetForecast(10);
+        }
+    }
 }

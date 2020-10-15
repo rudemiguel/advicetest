@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using advicetest.Contracts;
-using advicetest.Infrastructure;
 
 namespace advicetest.Services
 {
     /// <summary>
-    /// Сервис прогноза погоды
+    /// Сервис прогноза погода без аспектных дополнений
     /// </summary>
-    public interface IWeatherForecastService : IApplicationService
+    public interface ISimpleWeatherForecastService
     {
         /// <summary>
-        /// Прогноз погоды на несколько дней
+        /// Прогноз погоды на нскольео дней
         /// </summary>
         Task<IReadOnlyCollection<WeatherForecastContract>> GetForecast(int days);
 

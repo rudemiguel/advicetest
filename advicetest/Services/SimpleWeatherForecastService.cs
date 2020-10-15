@@ -7,9 +7,9 @@ using advicetest.Contracts;
 namespace advicetest.Services
 {
     /// <summary>
-    /// Сервис прогноза погоды
+    /// <inheritdoc />
     /// </summary>
-    public class WeatherForecastService : IWeatherForecastService
+    public class SimpleWeatherForecastService : ISimpleWeatherForecastService
     {
         private readonly Random _rng = new Random();
 
@@ -19,14 +19,14 @@ namespace advicetest.Services
         };
 
         /// <summary>
-        /// Сервис прогноза погоды
+        /// <inheritdoc cref="ISimpleWeatherForecastService" />
         /// </summary>
-        public WeatherForecastService()
+        public SimpleWeatherForecastService()
         {
         }
 
         /// <summary>
-        /// Прогноз погоды на несколько дней
+        /// <inheritdoc />
         /// </summary>
         public async Task<IReadOnlyCollection<WeatherForecastContract>> GetForecast(int days)
         {
@@ -39,7 +39,7 @@ namespace advicetest.Services
         }
 
         /// <summary>
-        /// Сегодняшний день
+        /// <inheritdoc />
         /// </summary>
         public DateTime Today()
         {
