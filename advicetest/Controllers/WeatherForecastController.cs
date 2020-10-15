@@ -12,12 +12,16 @@ namespace advicetest.Controllers
     {
         private readonly IWeatherForecastService _weatherForecastService;
         private readonly ISimpleWeatherForecastService _simpleWeatherForecastService;
+        private readonly ILoadTestingWeatherForecastService _loadTestingWeatherForecastService;
 
         public WeatherForecastController(
-            IWeatherForecastService weatherForecastService, ISimpleWeatherForecastService simpleWeatherForecastService)
+            IWeatherForecastService weatherForecastService, 
+            ISimpleWeatherForecastService simpleWeatherForecastService, 
+            ILoadTestingWeatherForecastService loadTestingWeatherForecastService)
         {
             _weatherForecastService = weatherForecastService;
             _simpleWeatherForecastService = simpleWeatherForecastService;
+            _loadTestingWeatherForecastService = loadTestingWeatherForecastService;
         }
 
         [HttpGet]
@@ -31,5 +35,11 @@ namespace advicetest.Controllers
         {
             return await _simpleWeatherForecastService.GetForecast(10);
         }
+        
+        [HttpGet("LoadTesting")]
+        public async Task<IEnumerable<WeatherForecastContract>> GetLoadTesting()
+        {
+            return await _loadTestingWeatherForecastService.GetForecast(10);
+        }        
     }
 }

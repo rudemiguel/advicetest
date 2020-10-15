@@ -16,7 +16,7 @@ namespace advicetest.Infrastructure.Interceptors.Setup
         /// <summary>
         /// Число копий <see cref="IAdvice"/> в IoT контейнере
         /// </summary>
-        private static int NumberOfAdviceCopies => 1;
+        private static int NumberOfAdviceCopies => 10;
 
         /// <summary>
         /// Настройка перехватчиков для сервисов наследованных от T

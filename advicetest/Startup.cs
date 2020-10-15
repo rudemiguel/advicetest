@@ -35,12 +35,14 @@ namespace advicetest
             // Добавляем сервисы
             services.AddTransient<IWeatherForecastService, WeatherForecastService>();
             services.AddTransient<ISimpleWeatherForecastService, SimpleWeatherForecastService>();
+            services.AddTransient<ILoadTestingWeatherForecastService, LoadTestingWeatherForecastService>();
 
             // Добавляем контроллеры
             services.AddControllers();
 
             // Настройка перехватчиков
             services.AddAdvicesOf<IApplicationService>();
+            services.AddAdvicesOf<ILoadTestingService>();
         }
 
         /// <summary>

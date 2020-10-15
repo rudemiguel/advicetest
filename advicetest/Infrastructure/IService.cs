@@ -1,9 +1,9 @@
 ﻿namespace advicetest.Infrastructure
 {
-	/// <summary>
-	/// Сервис
-	/// </summary>
-	public interface IService
-	{
-	}
+    /// <summary>
+    /// Сервис
+    /// </summary>
+    public interface IService
+    {
+    }
 }
