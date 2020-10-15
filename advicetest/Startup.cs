@@ -36,6 +36,7 @@ namespace advicetest
             services.AddTransient<IWeatherForecastService, WeatherForecastService>();
             services.AddTransient<ISimpleWeatherForecastService, SimpleWeatherForecastService>();
             services.AddTransient<ILoadTestingWeatherForecastService, LoadTestingWeatherForecastService>();
+            services.AddSingleton<LoadTestingMockJob>();
 
             // Добавляем контроллеры
             services.AddControllers();

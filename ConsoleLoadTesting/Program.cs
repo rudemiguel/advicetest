@@ -9,7 +9,7 @@ namespace ConsoleLoadTesting
         private static string Host => "http://localhost:5000/WeatherForecast/";
         private static int WarmUpDurationInSeconds => 1;
         private static int DurationInSeconds => 30;
-        private static int RequestInOneSecond => 500;
+        private static int RequestInOneSecond => 100;
         
         private static void Main(string[] args)
         {
