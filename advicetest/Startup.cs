@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using advicetest.Infrastructure;
 using advicetest.Infrastructure.Interceptors.Setup;
 using advicetest.Services;
+using advicetest.Infrastructure.Interceptors.Services;
 
 namespace advicetest
 {
@@ -39,7 +40,8 @@ namespace advicetest
 			services.AddControllers();
 
 			// Настройка перехватчиков
-			services.AddAdvicesOf<IApplicationService>();			
+			services.AddAdvicesOf<IApplicationService>();
+			services.AddControllerAdvices();
 		}
 
 		/// <summary>

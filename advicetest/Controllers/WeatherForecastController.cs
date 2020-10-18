@@ -6,12 +6,18 @@ using advicetest.Services;
 
 namespace advicetest.Controllers
 {
+	/// <summary>
+	/// Коетроллер погоды
+	/// </summary>
 	[ApiController]
 	[Route("[controller]")]
 	public class WeatherForecastController : ControllerBase
 	{
 		private readonly IWeatherForecastService _weatherForecastService;
 
+		/// <summary>
+		/// Коетроллер погоды
+		/// </summary>
 		public WeatherForecastController(
 			IWeatherForecastService weatherForecastService			
 		)
@@ -20,7 +26,7 @@ namespace advicetest.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IEnumerable<WeatherForecastContract>> Get()
+		public virtual async Task<IEnumerable<WeatherForecastContract>> Get([FromQuery] int locationId)
 		{
 			var today = _weatherForecastService.Today();
 
