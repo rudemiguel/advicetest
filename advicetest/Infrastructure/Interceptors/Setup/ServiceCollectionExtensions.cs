@@ -55,25 +55,22 @@ namespace advicetest.Infrastructure.Interceptors.Setup
                     )
                 );
 
-			// Кастомная фабрика контроллеров
-			services.Decorate<IControllerFactory, ControllerFactory>();
+            return services;
+        }
 
-			return services;
-		}
+        /// <summary>
+        /// Настройка перехватчиков для контроллеров
+        /// </summary>
+        /// <remarks>
+        /// Чтобы это работало все публиные методы контроллеров должны быть виртуальными
+        /// </remarks>
+        public static IServiceCollection AddControllerAdvices(this IServiceCollection services)
+        {
+            // Кастомная фабрика контроллеров
+            services.Decorate<IControllerFactory, ControllerFactory>();
 
-		/// <summary>
-		/// Настройка перехватчиков для контроллеров
-		/// </summary>
-		/// <remarks>
-		/// Чтобы это работало все публиные методы контроллеров должны быть виртуальными
-		/// </remarks>
-		public static IServiceCollection AddControllerAdvices(this IServiceCollection services)
-		{
-			// Кастомная фабрика контроллеров
-			services.Decorate<IControllerFactory, ControllerFactory>();
-
-			return services;
-		}
+            return services;
+        }
 
         /// <summary>
         /// Фабрика создания экземпляра сервиса

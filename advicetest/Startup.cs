@@ -42,11 +42,11 @@ namespace advicetest
             // Добавляем контроллеры
             services.AddControllers();
 
-			// Настройка перехватчиков
-			services.AddAdvicesOf<IApplicationService>();
-			services.AddControllerAdvices();
+            // Настройка перехватчиков
             services.AddAdvicesOf<IApplicationService>();
             services.AddAdvicesOf<ILoadTestingService>();
+
+            //services.AddControllerAdvices();
         }
 
         /// <summary>
