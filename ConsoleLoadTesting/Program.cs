@@ -28,8 +28,12 @@ namespace ConsoleLoadTesting
                 .WithLoadSimulations(Simulation.InjectPerSec(RequestInOneSecond, TimeSpan.FromSeconds(DurationInSeconds)));
             
             NBomberRunner
-                .RegisterScenarios(simpleScenario, aspectScenario)
+                .RegisterScenarios(simpleScenario)
                 .Run();
+            
+            NBomberRunner
+                .RegisterScenarios(aspectScenario)
+                .Run();            
         }
     }
 }
