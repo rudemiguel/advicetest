@@ -2,6 +2,9 @@
 
 namespace advicetest.Contracts
 {
+	/// <summary>
+	/// Контракт погоды
+	/// </summary>
 	public class WeatherForecastContract
 	{
 		public DateTime Date { get; set; }

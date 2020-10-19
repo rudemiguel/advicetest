@@ -6,40 +6,31 @@ using advicetest.Services;
 
 namespace advicetest.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
-    {
-        private readonly IWeatherForecastService _weatherForecastService;
-        private readonly ISimpleWeatherForecastService _simpleWeatherForecastService;
-        private readonly ILoadTestingWeatherForecastService _loadTestingWeatherForecastService;
+	/// <summary>
+	/// Коетроллер погоды
+	/// </summary>
+	[ApiController]
+	[Route("[controller]")]
+	public class WeatherForecastController : ControllerBase
+	{
+		private readonly IWeatherForecastService _weatherForecastService;
 
-        public WeatherForecastController(
-            IWeatherForecastService weatherForecastService, 
-            ISimpleWeatherForecastService simpleWeatherForecastService, 
-            ILoadTestingWeatherForecastService loadTestingWeatherForecastService)
-        {
-            _weatherForecastService = weatherForecastService;
-            _simpleWeatherForecastService = simpleWeatherForecastService;
-            _loadTestingWeatherForecastService = loadTestingWeatherForecastService;
-        }
+		/// <summary>
+		/// Коетроллер погоды
+		/// </summary>
+		public WeatherForecastController(
+			IWeatherForecastService weatherForecastService			
+		)
+		{
+			_weatherForecastService = weatherForecastService;
+		}
 
-        [HttpGet]
-        public async Task<IEnumerable<WeatherForecastContract>> Get()
-        {
-            return await _weatherForecastService.GetForecast(10);
-        }
-        
-        [HttpGet("Simple")]
-        public async Task<IEnumerable<WeatherForecastContract>> GetSimple()
-        {
-            return await _simpleWeatherForecastService.GetForecast(10);
-        }
-        
-        [HttpGet("LoadTesting")]
-        public async Task<IEnumerable<WeatherForecastContract>> GetLoadTesting()
-        {
-            return await _loadTestingWeatherForecastService.GetForecast(10);
-        }        
-    }
+		[HttpGet]
+		public virtual async Task<IEnumerable<WeatherForecastContract>> Get([FromQuery] int locationId)
+		{
+			var today = _weatherForecastService.Today();
+
+			return await _weatherForecastService.GetForecast(10);
+		}
+	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Castle.DynamicProxy;
 using advicetest.Infrastructure.Interceptors.Services;
 
@@ -54,8 +55,25 @@ namespace advicetest.Infrastructure.Interceptors.Setup
                     )
                 );
 
-            return services;
-        }
+			// Кастомная фабрика контроллеров
+			services.Decorate<IControllerFactory, ControllerFactory>();
+
+			return services;
+		}
+
+		/// <summary>
+		/// Настройка перехватчиков для контроллеров
+		/// </summary>
+		/// <remarks>
+		/// Чтобы это работало все публиные методы контроллеров должны быть виртуальными
+		/// </remarks>
+		public static IServiceCollection AddControllerAdvices(this IServiceCollection services)
+		{
+			// Кастомная фабрика контроллеров
+			services.Decorate<IControllerFactory, ControllerFactory>();
+
+			return services;
+		}
 
         /// <summary>
         /// Фабрика создания экземпляра сервиса
