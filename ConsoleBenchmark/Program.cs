@@ -13,23 +13,21 @@ namespace ConsoleBenchmark
     {
         static void Main(string[] args)
         {
-            // BenchmarkRunner.Run<AdviceBenchmark>();
-            var res = new AdviceBenchmark();
-            res.WithAdvices();
+            BenchmarkRunner.Run<AdviceBenchmark>();
         }
 
         public class AdviceBenchmark
         {
-            public static IServiceProvider ServiceProvider = GetAdviceServiceProvider();
+            private static readonly IServiceProvider ServiceProvider = GetAdviceServiceProvider();
 
-            public static string LastResult;
+            private static string _lastResult;
 
             [Benchmark(Baseline = true)]
             public void WithoutAdvices()
             {
                 var serviceWithoutAdvices = ServiceProvider.GetRequiredService<ISimpleWeatherForecastService>();
                 var res = serviceWithoutAdvices.GetForecast(10).GetAwaiter().GetResult();
-                LastResult = res.First().Summary;
+                _lastResult = res.First().Summary;
             }
 
             [Benchmark]
@@ -37,11 +35,11 @@ namespace ConsoleBenchmark
             {
                 var serviceWithAdvices = ServiceProvider.GetRequiredService<ILoadTestingWeatherForecastService>();
                 var res = serviceWithAdvices.GetForecast(10).GetAwaiter().GetResult();
-                LastResult = res.First().Summary;
+                _lastResult = res.First().Summary;
             }
         }
 
-        public static IServiceProvider GetAdviceServiceProvider()
+        private static IServiceProvider GetAdviceServiceProvider()
         {
             var serviceCollection = new ServiceCollection();
 

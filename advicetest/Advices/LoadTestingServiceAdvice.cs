@@ -9,12 +9,11 @@ namespace advicetest.Advices
 {
     public class LoadTestingServiceAdvice : IAdvice<ILoadTestingService>
     {
-        private readonly ILogger<LoadTestingServiceAdvice> _logger;
+        // private readonly ILogger<LoadTestingServiceAdvice> _logger;
         private readonly LoadTestingMockJob _loadTestingMockJob;
         
-        public LoadTestingServiceAdvice(ILogger<LoadTestingServiceAdvice> logger, LoadTestingMockJob loadTestingMockJob)
+        public LoadTestingServiceAdvice(LoadTestingMockJob loadTestingMockJob)
         {
-            _logger = logger;
             _loadTestingMockJob = loadTestingMockJob;
         }
 
