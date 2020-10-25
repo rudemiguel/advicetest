@@ -26,11 +26,9 @@ namespace advicetest.Controllers
 		}
 
 		[HttpGet]
-		public virtual async Task<IEnumerable<WeatherForecastContract>> Get([FromQuery] int locationId)
+		public virtual async Task<IEnumerable<WeatherForecastResponseContract>> Get([FromQuery] WeatherForecastRequestContract request)
 		{
-			var today = _weatherForecastService.Today();
-
-			return await _weatherForecastService.GetForecast(10);
+			return await _weatherForecastService.GetForecast(request);
 		}
 	}
 }

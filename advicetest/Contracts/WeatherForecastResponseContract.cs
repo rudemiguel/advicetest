@@ -5,7 +5,7 @@ namespace advicetest.Contracts
 	/// <summary>
 	/// Контракт погоды
 	/// </summary>
-	public class WeatherForecastContract
+	public class WeatherForecastResponseContract
 	{
 		public DateTime Date { get; set; }
 

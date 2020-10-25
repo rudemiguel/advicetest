@@ -14,7 +14,7 @@ namespace advicetest.Services
 		/// <summary>
 		/// Прогноз погоды на нскольео дней
 		/// </summary>
-		Task<IReadOnlyCollection<WeatherForecastContract>> GetForecast(int days);
+		Task<IReadOnlyCollection<WeatherForecastResponseContract>> GetForecast(WeatherForecastRequestContract request);
 
 		/// <summary>
 		/// Сегодняшний день

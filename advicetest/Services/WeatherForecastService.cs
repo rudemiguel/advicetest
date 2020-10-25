@@ -28,9 +28,9 @@ namespace advicetest.Services
 		/// <summary>
 		/// Прогноз погоды на нскольео дней
 		/// </summary>
-		public async Task<IReadOnlyCollection<WeatherForecastContract>> GetForecast(int days)
+		public async Task<IReadOnlyCollection<WeatherForecastResponseContract>> GetForecast(WeatherForecastRequestContract request)
 		{
-			return Enumerable.Range(1, 5).Select(index => new WeatherForecastContract
+			return Enumerable.Range(1, 5).Select(index => new WeatherForecastResponseContract
 			{
 				Date = DateTime.Now.AddDays(index),
 				TemperatureC = _rng.Next(-20, 55),

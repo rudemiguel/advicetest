@@ -7,6 +7,9 @@ using advicetest.Infrastructure;
 using advicetest.Infrastructure.Interceptors.Setup;
 using advicetest.Services;
 using advicetest.Infrastructure.Interceptors.Services;
+using advicetest.Infrastructure.Validation.Setup;
+using FluentValidation.AspNetCore;
+using advicetest.Infrastructure.Middleware;
 
 namespace advicetest
 {
@@ -41,6 +44,7 @@ namespace advicetest
 
 			// Настройка перехватчиков
 			services.AddAdvicesOf<IApplicationService>();
+			services.AddValidation();
 			services.AddControllerAdvices();
 		}
 
@@ -54,6 +58,7 @@ namespace advicetest
 
 			app.UseRouting();
 			app.UseAuthorization();
+			app.UseMiddleware<ErrorHandlingMiddleware>();
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

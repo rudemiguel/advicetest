@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace advicetest.Infrastructure.Interceptors.Services
 {
@@ -34,7 +35,7 @@ namespace advicetest.Infrastructure.Interceptors.Services
 			var interfaceTypes = GetTypes(serviceType);
 
 			var advices = interfaceTypes
-				.Select(x => _serviceProvider.GetService(typeof(IAdvice<>).MakeGenericType(x)))
+				.SelectMany(x => _serviceProvider.GetServices(typeof(IAdvice<>).MakeGenericType(x)))
 				.Where(x => x != null)
 				.Cast<IAdvice>()
 				.ToList();

@@ -9,7 +9,17 @@
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="DeepCloner" Version="0.10.2" />
     <PackageReference Include="Scrutor" Version="3.2.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
   </ItemGroup>
 
 
+  <ItemGroup>
+    <Folder Include="Validators\" />
+    <Folder Include="Infrastructure\Validation\" />
+    <Folder Include="Infrastructure\Validation\Setup\" />
+    <Folder Include="Infrastructure\Validation\Advices\" />
+    <Folder Include="Infrastructure\Exceptions\" />
+    <Folder Include="Infrastructure\Validation\Exceptions\" />
+    <Folder Include="Infrastructure\Middleware\" />
+  </ItemGroup>
 </Project>
