@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -6,7 +7,9 @@ namespace advicetest.Infrastructure.Interceptors.Extensions
 {
 	public static class TaskExtensions
 	{
-		private static MethodInfo _methodInfo = typeof(Task).GetMethod(nameof(Task.FromResult));			
+		private static MethodInfo _resultMethodInfo = typeof(Task).GetMethod(nameof(Task.FromResult));			
+		private static MethodInfo _exceptionMethodInfo = typeof(Task).GetMethods().
+			FirstOrDefault(x => x.Name == nameof(Task.FromException) && x.IsGenericMethod);
 
 		/// <summary>
 		/// Преобразуем Task в Task[T] с результатом
@@ -15,8 +18,15 @@ namespace advicetest.Infrastructure.Interceptors.Extensions
 		{
 			resultType ??= task.Result.GetType();
 
-			var taskFromResultMethod = _methodInfo.MakeGenericMethod(resultType);
+			// Если таск с ошибой создаем из ошибки
+			if (task.IsFaulted)
+			{
+				var taskFromExceptionMethod = _exceptionMethodInfo.MakeGenericMethod(resultType);
+				return taskFromExceptionMethod.Invoke(null, new[] { task.Exception }) as Task;
+			}
 
+			// Если результат создаем из результата
+			var taskFromResultMethod = _resultMethodInfo.MakeGenericMethod(resultType);
 			return taskFromResultMethod.Invoke(null, new[] { task.Result }) as Task;
 		}
 	}

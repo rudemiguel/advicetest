@@ -46,9 +46,6 @@ namespace advicetest.Infrastructure.Interceptors.Setup
 				.WithTransientLifetime()
 			);
 
-			// Кастомная фабрика контроллеров
-			services.Decorate<IControllerFactory, ControllerFactory>();
-
 			return services;
 		}
 
